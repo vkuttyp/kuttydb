@@ -1,5 +1,8 @@
 import type { Database } from "sqldialects";
-import { sqldialectsSession, type sqldialectsSessionOptions } from "./_session.ts";
+import {
+  sqldialectsSession,
+  type sqldialectsSessionOptions,
+} from "./_session.ts";
 
 import { DefaultLogger } from "drizzle-orm/logger";
 
