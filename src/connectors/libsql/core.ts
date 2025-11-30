@@ -1,5 +1,5 @@
 import type { Client, InStatement } from "@libsql/client";
-import type { Connector, Primitive } from "dbjs";
+import type { Connector, Primitive } from "kuttydb";
 import { BoundableStatement } from "../_internal/statement.ts";
 
 export type ConnectorOptions = {

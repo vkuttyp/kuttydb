@@ -2,7 +2,7 @@ import { resolve, dirname } from "node:path";
 import { mkdirSync } from "node:fs";
 import sqlite3 from "sqlite3";
 
-import type { Connector, Primitive } from "dbjs";
+import type { Connector, Primitive } from "kuttydb";
 import { BoundableStatement } from "./_internal/statement.ts";
 
 export interface ConnectorOptions {
@@ -58,7 +58,10 @@ export default function nodeSqlite3Connector(
       await Promise.all(
         [..._activeStatements].map((s) =>
           s.finalize().catch((error) => {
-            console.warn("[dbjs] [sqlite3] failed to finalize statement", error);
+            console.warn(
+              "[kuttydb] [sqlite3] failed to finalize statement",
+              error,
+            );
           }),
         ),
       );

@@ -6,7 +6,7 @@ import {
   TYPES,
 } from "tedious";
 
-import type { Connector, Statement, Primitive } from "dbjs";
+import type { Connector, Statement, Primitive } from "kuttydb";
 
 // Type for tedious DataType
 type DataType = (typeof TYPES)[keyof typeof TYPES];

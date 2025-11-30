@@ -1,6 +1,6 @@
 //#region src/template.ts
 function sqlTemplate(strings, ...values) {
-	if (!isTemplateStringsArray(strings) || !Array.isArray(values)) throw new Error("[dbjs] invalid template invocation");
+	if (!isTemplateStringsArray(strings) || !Array.isArray(values)) throw new Error("[kuttydb] invalid template invocation");
 	const staticIndexes = [];
 	let result = strings[0] || "";
 	for (let i = 1; i < strings.length; i++) {
@@ -87,25 +87,25 @@ function createDatabase(connector) {
 //#endregion
 //#region src/_connectors.ts
 const connectors = Object.freeze({
-	"better-sqlite3": "dbjs/connectors/better-sqlite3",
-	"bun-sqlite": "dbjs/connectors/bun-sqlite",
-	"bun": "dbjs/connectors/bun-sqlite",
-	"cloudflare-d1": "dbjs/connectors/cloudflare-d1",
-	"cloudflare-hyperdrive-mysql": "dbjs/connectors/cloudflare-hyperdrive-mysql",
-	"cloudflare-hyperdrive-postgresql": "dbjs/connectors/cloudflare-hyperdrive-postgresql",
-	"libsql-core": "dbjs/connectors/libsql/core",
-	"libsql-http": "dbjs/connectors/libsql/http",
-	"libsql-node": "dbjs/connectors/libsql/node",
-	"libsql": "dbjs/connectors/libsql/node",
-	"libsql-web": "dbjs/connectors/libsql/web",
-	"mssql": "dbjs/connectors/mssql",
-	"mysql2": "dbjs/connectors/mysql2",
-	"node-sqlite": "dbjs/connectors/node-sqlite",
-	"sqlite": "dbjs/connectors/node-sqlite",
-	"pglite": "dbjs/connectors/pglite",
-	"planetscale": "dbjs/connectors/planetscale",
-	"postgresql": "dbjs/connectors/postgresql",
-	"sqlite3": "dbjs/connectors/sqlite3"
+	"better-sqlite3": "kuttydb/connectors/better-sqlite3",
+	"bun-sqlite": "kuttydb/connectors/bun-sqlite",
+	"bun": "kuttydb/connectors/bun-sqlite",
+	"cloudflare-d1": "kuttydb/connectors/cloudflare-d1",
+	"cloudflare-hyperdrive-mysql": "kuttydb/connectors/cloudflare-hyperdrive-mysql",
+	"cloudflare-hyperdrive-postgresql": "kuttydb/connectors/cloudflare-hyperdrive-postgresql",
+	"libsql-core": "kuttydb/connectors/libsql/core",
+	"libsql-http": "kuttydb/connectors/libsql/http",
+	"libsql-node": "kuttydb/connectors/libsql/node",
+	"libsql": "kuttydb/connectors/libsql/node",
+	"libsql-web": "kuttydb/connectors/libsql/web",
+	"mssql": "kuttydb/connectors/mssql",
+	"mysql2": "kuttydb/connectors/mysql2",
+	"node-sqlite": "kuttydb/connectors/node-sqlite",
+	"sqlite": "kuttydb/connectors/node-sqlite",
+	"pglite": "kuttydb/connectors/pglite",
+	"planetscale": "kuttydb/connectors/planetscale",
+	"postgresql": "kuttydb/connectors/postgresql",
+	"sqlite3": "kuttydb/connectors/sqlite3"
 });
 
 //#endregion

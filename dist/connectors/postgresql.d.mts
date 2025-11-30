@@ -1,5 +1,5 @@
 import pg from "pg";
-import type { Connector } from "dbjs";
+import type { Connector } from "kuttydb";
 export type ConnectorOptions = {
 	url: string;
 } | pg.ClientConfig;

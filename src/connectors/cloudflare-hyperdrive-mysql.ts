@@ -1,5 +1,5 @@
 import mysql from "mysql2/promise";
-import type { Connector, Primitive } from "dbjs";
+import type { Connector, Primitive } from "kuttydb";
 import { BoundableStatement } from "./_internal/statement.ts";
 import { getHyperdrive } from "./_internal/cloudflare.ts";
 

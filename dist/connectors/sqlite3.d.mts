@@ -1,5 +1,5 @@
 import sqlite3 from "sqlite3";
-import type { Connector } from "dbjs";
+import type { Connector } from "kuttydb";
 export interface ConnectorOptions {
 	cwd?: string;
 	path?: string;

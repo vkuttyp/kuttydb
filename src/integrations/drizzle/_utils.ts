@@ -40,6 +40,7 @@ export function mapResultRow<TResult>(
         } else {
           const rawValue = row[columnIndex]!;
           const value = (node[pathChunk] =
+            // eslint-disable-next-line unicorn/no-null
             rawValue === null ? null : decoder.mapFromDriverValue(rawValue));
 
           if (joinsNotNullableMap && is(field, Column) && path.length === 2) {
@@ -65,6 +66,7 @@ export function mapResultRow<TResult>(
   if (joinsNotNullableMap && Object.keys(nullifyMap).length > 0) {
     for (const [objectName, tableName] of Object.entries(nullifyMap)) {
       if (typeof tableName === "string" && !joinsNotNullableMap[tableName]) {
+        // eslint-disable-next-line unicorn/no-null
         result[objectName] = null;
       }
     }

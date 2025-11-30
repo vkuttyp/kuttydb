@@ -24,7 +24,7 @@ export function createDatabase<TConnector extends Connector = Connector>(
   const checkDisposed = () => {
     if (_disposed) {
       const err = new Error(DISPOSED_ERR);
-      if (typeof (Error as any).captureStackTrace === 'function') {
+      if (typeof (Error as any).captureStackTrace === "function") {
         (Error as any).captureStackTrace(err, checkDisposed);
       }
       throw err;

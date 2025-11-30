@@ -1,5 +1,5 @@
-import type { Database } from "dbjs";
-import { dbjsSession, type dbjsSessionOptions } from "./_session.ts";
+import type { Database } from "kuttydb";
+import { kuttydbSession, type kuttydbSessionOptions } from "./_session.ts";
 
 import { DefaultLogger } from "drizzle-orm/logger";
 
@@ -29,7 +29,7 @@ export function drizzle<
 >(db: Database, config?: DrizzleConfig<TSchema>): DrizzleDatabase<TSchema> {
   const dialect = new SQLiteAsyncDialect({ casing: config?.casing });
 
-  let logger: dbjsSessionOptions["logger"];
+  let logger: kuttydbSessionOptions["logger"];
   if (config?.logger === true) {
     logger = new DefaultLogger();
   } else if (config?.logger !== false && config?.logger !== undefined) {
@@ -51,7 +51,7 @@ export function drizzle<
     };
   }
 
-  const session = new dbjsSession(db, dialect, schema, {
+  const session = new kuttydbSession(db, dialect, schema, {
     logger,
   });
 

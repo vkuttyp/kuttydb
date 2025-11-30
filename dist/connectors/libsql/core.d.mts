@@ -1,5 +1,5 @@
 import type { Client } from "@libsql/client";
-import type { Connector } from "dbjs";
+import type { Connector } from "kuttydb";
 export type ConnectorOptions = {
 	getClient: () => Client;
 	name?: string;

@@ -1,19 +1,19 @@
-import { ConnectorOptions as ConnectorOptions$1 } from "dbjs/connectors/better-sqlite3";
-import { ConnectorOptions as ConnectorOptions$2 } from "dbjs/connectors/bun-sqlite";
-import { ConnectorOptions as ConnectorOptions$3 } from "dbjs/connectors/cloudflare-d1";
-import { ConnectorOptions as ConnectorOptions$4 } from "dbjs/connectors/cloudflare-hyperdrive-mysql";
-import { ConnectorOptions as ConnectorOptions$5 } from "dbjs/connectors/cloudflare-hyperdrive-postgresql";
-import { ConnectorOptions as ConnectorOptions$6 } from "dbjs/connectors/libsql/core";
-import { ConnectorOptions as ConnectorOptions$7 } from "dbjs/connectors/libsql/http";
-import { ConnectorOptions as ConnectorOptions$8 } from "dbjs/connectors/libsql/node";
-import { ConnectorOptions as ConnectorOptions$9 } from "dbjs/connectors/libsql/web";
-import { ConnectorOptions as ConnectorOptions$10 } from "dbjs/connectors/mssql";
-import { ConnectorOptions as ConnectorOptions$11 } from "dbjs/connectors/mysql2";
-import { ConnectorOptions as ConnectorOptions$12 } from "dbjs/connectors/node-sqlite";
-import { ConnectorOptions as ConnectorOptions$13 } from "dbjs/connectors/pglite";
-import { ConnectorOptions as ConnectorOptions$14 } from "dbjs/connectors/planetscale";
-import { ConnectorOptions as ConnectorOptions$15 } from "dbjs/connectors/postgresql";
-import { ConnectorOptions as ConnectorOptions$16 } from "dbjs/connectors/sqlite3";
+import { ConnectorOptions as ConnectorOptions$1 } from "kuttydb/connectors/better-sqlite3";
+import { ConnectorOptions as ConnectorOptions$2 } from "kuttydb/connectors/bun-sqlite";
+import { ConnectorOptions as ConnectorOptions$3 } from "kuttydb/connectors/cloudflare-d1";
+import { ConnectorOptions as ConnectorOptions$4 } from "kuttydb/connectors/cloudflare-hyperdrive-mysql";
+import { ConnectorOptions as ConnectorOptions$5 } from "kuttydb/connectors/cloudflare-hyperdrive-postgresql";
+import { ConnectorOptions as ConnectorOptions$6 } from "kuttydb/connectors/libsql/core";
+import { ConnectorOptions as ConnectorOptions$7 } from "kuttydb/connectors/libsql/http";
+import { ConnectorOptions as ConnectorOptions$8 } from "kuttydb/connectors/libsql/node";
+import { ConnectorOptions as ConnectorOptions$9 } from "kuttydb/connectors/libsql/web";
+import { ConnectorOptions as ConnectorOptions$10 } from "kuttydb/connectors/mssql";
+import { ConnectorOptions as ConnectorOptions$11 } from "kuttydb/connectors/mysql2";
+import { ConnectorOptions as ConnectorOptions$12 } from "kuttydb/connectors/node-sqlite";
+import { ConnectorOptions as ConnectorOptions$13 } from "kuttydb/connectors/pglite";
+import { ConnectorOptions as ConnectorOptions$14 } from "kuttydb/connectors/planetscale";
+import { ConnectorOptions as ConnectorOptions$15 } from "kuttydb/connectors/postgresql";
+import { ConnectorOptions as ConnectorOptions$16 } from "kuttydb/connectors/sqlite3";
 
 //#region src/types.d.ts
 type Primitive = string | number | boolean | undefined | null;

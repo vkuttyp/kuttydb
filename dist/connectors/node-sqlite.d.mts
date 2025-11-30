@@ -1,4 +1,4 @@
-import type { Connector } from "dbjs";
+import type { Connector } from "kuttydb";
 import type { DatabaseSync } from "node:sqlite";
 export interface ConnectorOptions {
 	cwd?: string;

@@ -1,4 +1,4 @@
-import type { Primitive, Statement, PreparedStatement } from "dbjs";
+import type { Primitive, Statement, PreparedStatement } from "kuttydb";
 export declare abstract class BoundableStatement<T> implements Statement {
 	_statement: T;
 	constructor(rawStmt: T);

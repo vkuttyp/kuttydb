@@ -5,7 +5,7 @@ export async function getHyperdrive(bindingName) {
 	const env = await getCloudflareEnv();
 	const binding = env[bindingName];
 	if (!binding) {
-		throw new Error(`[dbjs] [hyperdrive] binding \`${bindingName}\` not found`);
+		throw new Error(`[kuttydb] [hyperdrive] binding \`${bindingName}\` not found`);
 	}
 	return binding;
 }

@@ -1,5 +1,5 @@
 import { Database } from "bun:sqlite";
-import type { Connector } from "dbjs";
+import type { Connector } from "kuttydb";
 export interface ConnectorOptions {
 	cwd?: string;
 	path?: string;

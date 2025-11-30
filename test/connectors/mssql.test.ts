@@ -4,10 +4,10 @@ import { TYPES } from "tedious";
 import {
   getTediousDataType,
   prepareSqlParameters,
-} from "../../src/connectors/mssql";
-import connector from "../../src/connectors/mssql";
-import { testConnector } from "./_tests";
-import { createDatabase } from "../../src";
+} from "../../src/connectors/mssql.js";
+import connector from "../../src/connectors/mssql.js";
+import { testConnector } from "./_tests.js";
+import { createDatabase } from "../../src/index.js";
 
 describe.runIf(
   process.env.MSSQL_HOST &&
@@ -183,8 +183,8 @@ describe.runIf(
 
     // SQL Server returns JSON as a single column result
     // The JSON data is in the first column (usually named "JSON_F52E2B61-18A1-11d1-B105-00805F49916B")
-    const jsonColumn = Object.keys(rows[0] as object)[0];
-    const jsonString = (rows[0] as Record<string, string>)[jsonColumn];
+    const jsonColumn = Object.keys(rows[0] as object)[0]!;
+    const jsonString = (rows[0] as Record<string, string>)[jsonColumn]!;
 
     expect(jsonString).toBeDefined();
     const jsonData = JSON.parse(jsonString);
@@ -221,8 +221,8 @@ describe.runIf(
     const rows = await stmt.all();
     expect(rows).toBeDefined();
 
-    const jsonColumn = Object.keys(rows[0] as object)[0];
-    const jsonString = (rows[0] as Record<string, string>)[jsonColumn];
+    const jsonColumn = Object.keys(rows[0] as object)[0]!;
+    const jsonString = (rows[0] as Record<string, string>)[jsonColumn]!;
     const jsonData = JSON.parse(jsonString);
 
     expect(Array.isArray(jsonData)).toBe(true);
@@ -403,6 +403,7 @@ describe.runIf(
 
 describe("getTediousDataType", () => {
   it("should return NVarChar for null", () => {
+    // eslint-disable-next-line unicorn/no-null
     expect(getTediousDataType(null)).toBe(TYPES.NVarChar);
   });
 
@@ -479,12 +480,14 @@ describe("prepareSqlParameters", () => {
 
   it("should handle null and undefined parameters", () => {
     const sql = "SELECT * FROM users WHERE name = ? AND email = ?";
+    // eslint-disable-next-line unicorn/no-null
     const parameters = [null, undefined];
     const result = prepareSqlParameters(sql, parameters);
     expect(result.sql).toBe(
       "SELECT * FROM users WHERE name = @1 AND email = @2",
     );
     expect(result.parameters).toEqual({
+      // eslint-disable-next-line unicorn/no-null
       "@1": { name: "1", type: TYPES.NVarChar, value: null },
       "@2": { name: "2", type: TYPES.NVarChar, value: undefined },
     });

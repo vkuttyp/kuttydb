@@ -1,7 +1,7 @@
 import { resolve, dirname } from "node:path";
 import { mkdirSync } from "node:fs";
 import { Database, Statement as RawStatement } from "bun:sqlite";
-import type { Connector, Primitive } from "dbjs";
+import type { Connector, Primitive } from "kuttydb";
 import { BoundableStatement } from "./_internal/statement.ts";
 
 export interface ConnectorOptions {

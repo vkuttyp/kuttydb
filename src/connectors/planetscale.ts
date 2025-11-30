@@ -1,6 +1,6 @@
 import { Client, type ExecutedQuery, type Config } from "@planetscale/database";
 
-import type { Connector, Primitive } from "dbjs";
+import type { Connector, Primitive } from "kuttydb";
 
 import { BoundableStatement } from "./_internal/statement.ts";
 

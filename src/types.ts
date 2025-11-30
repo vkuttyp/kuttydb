@@ -35,8 +35,9 @@ type DefaultSQLResult = {
   success?: boolean;
 };
 
-export interface Database<TConnector extends Connector = Connector>
-  extends AsyncDisposable {
+export interface Database<
+  TConnector extends Connector = Connector,
+> extends AsyncDisposable {
   readonly dialect: SQLDialect;
   readonly disposed: boolean;
   getInstance: () => Promise<Awaited<ReturnType<TConnector["getInstance"]>>>;
