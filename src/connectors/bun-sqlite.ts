@@ -1,6 +1,6 @@
 import { resolve, dirname } from "node:path";
 import { mkdirSync } from "node:fs";
-// @ts-expect-error - bun:sqlite is not typed
+// @ts-ignore - bun:sqlite is only available in Bun runtime
 import { Database, Statement as RawStatement } from "bun:sqlite";
 import type { Connector, Primitive } from "kuttydb";
 import { BoundableStatement } from "./_internal/statement.ts";
