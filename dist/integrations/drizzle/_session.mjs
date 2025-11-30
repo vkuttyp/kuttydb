@@ -17,7 +17,7 @@ export class kuttydbSession extends SQLiteSession {
 	}
 	// TODO: Implement batch
 	// TODO: Implement transaction
-	transaction(transaction, config) {
+	transaction(_transaction, _config) {
 		throw new Error("transaction is not implemented!");
 		//   const tx = new D1Transaction('async', this.dialect, this, this.schema);
 		//   await this.run(sql.raw(`begin${config?.behavior ? ' ' + config.behavior : ''}`));
@@ -32,7 +32,7 @@ export class kuttydbSession extends SQLiteSession {
 	}
 }
 export class kuttydbPreparedQuery extends SQLitePreparedQuery {
-	constructor(stmt, query, logger, fields, executeMethod, customResultMapper) {
+	constructor(stmt, query, logger, fields, executeMethod, _customResultMapper) {
 		super("async", executeMethod, query);
 		this.stmt = stmt;
 		this.logger = logger;

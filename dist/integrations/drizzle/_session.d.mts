@@ -20,7 +20,7 @@ export declare class kuttydbSession<
 	prepareQuery(query: Query, fields: SelectedFieldsOrdered | undefined, executeMethod: SQLiteExecuteMethod, customResultMapper?: (rows: unknown[][]) => unknown): kuttydbPreparedQuery;
 	// TODO: Implement batch
 	// TODO: Implement transaction
-	transaction<T>(transaction: (tx: any) => T | Promise<T>, config?: SQLiteTransactionConfig): Promise<T>;
+	transaction<T>(_transaction: (tx: any) => T | Promise<T>, _config?: SQLiteTransactionConfig): Promise<T>;
 }
 export declare class kuttydbPreparedQuery<T extends PreparedQueryConfig = PreparedQueryConfig> extends SQLitePreparedQuery<{
 	type: "async";
@@ -32,7 +32,7 @@ export declare class kuttydbPreparedQuery<T extends PreparedQueryConfig = Prepar
 }> {
 	private stmt;
 	private logger;
-	constructor(stmt: Statement, query: Query, logger: Logger, fields: SelectedFieldsOrdered | undefined, executeMethod: SQLiteExecuteMethod, customResultMapper?: (rows: unknown[][]) => unknown);
+	constructor(stmt: Statement, query: Query, logger: Logger, fields: SelectedFieldsOrdered | undefined, executeMethod: SQLiteExecuteMethod, _customResultMapper?: (rows: unknown[][]) => unknown);
 	run(): Promise<{
 		success: boolean;
 	}>;

@@ -1,3 +1,4 @@
+// @ts-ignore - bun:sqlite is only available in Bun runtime
 import { Database } from "bun:sqlite";
 import type { Connector } from "kuttydb";
 export interface ConnectorOptions {
