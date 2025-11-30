@@ -5,15 +5,15 @@ export function sqlTemplate(
   ...values: Primitive[]
 ): [string, Primitive[]] {
   if (!isTemplateStringsArray(strings) || !Array.isArray(values)) {
-    throw new Error("[db0] invalid template invocation");
+    throw new Error("[dbjs] invalid template invocation");
   }
 
   const staticIndexes: number[] = [];
 
   let result = strings[0] || "";
   for (let i = 1; i < strings.length; i++) {
-    if (result.endsWith("{") && strings[i].startsWith("}")) {
-      result = result.slice(0, -1) + values[i - 1] + strings[i].slice(1);
+    if (result.endsWith("{") && strings[i]?.startsWith("}")) {
+      result = result.slice(0, -1) + values[i - 1] + strings[i]!.slice(1);
       staticIndexes.push(i - 1);
       continue;
     }
