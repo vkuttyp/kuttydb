@@ -1,0 +1,21 @@
+name: ci
+
+on: { push: {}, pull_request: {} }
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: npm i -g --force corepack && corepack enable
+      - uses: actions/setup-node@v6
+        with: { node-version: lts/*, cache: pnpm }
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm build
+      - run: pnpm test:types
+      - run: pnpm vitest
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
