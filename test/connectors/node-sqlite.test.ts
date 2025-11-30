@@ -1,6 +1,6 @@
 import { describe } from "vitest";
-import connector from "../../src/connectors/node-sqlite";
-import { testConnector } from "./_tests";
+import connector from "../../src/connectors/node-sqlite.js";
+import { testConnector } from "./_tests.js";
 
 describe("connectors: node-sqlite (native)", () => {
   testConnector({

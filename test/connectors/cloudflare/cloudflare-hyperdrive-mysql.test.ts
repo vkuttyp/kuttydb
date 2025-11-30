@@ -1,7 +1,7 @@
 import { getPlatformProxy, type PlatformProxy } from "wrangler";
 import { afterAll, beforeAll, describe } from "vitest";
-import cloudflareHyperdriveMysql from "../../../src/connectors/cloudflare-hyperdrive-mysql";
-import { testConnector } from "../_tests";
+import cloudflareHyperdriveMysql from "../../../src/connectors/cloudflare-hyperdrive-mysql.js";
+import { testConnector } from "../_tests.js";
 import { fileURLToPath } from "node:url";
 
 describe.runIf(process.env.MYSQL_URL)(

@@ -27,7 +27,9 @@ export type DrizzleConfig<
 export function drizzle<
   TSchema extends Record<string, unknown> = Record<string, never>,
 >(db: Database, config?: DrizzleConfig<TSchema>): DrizzleDatabase<TSchema> {
-  const dialect = new SQLiteAsyncDialect({ casing: config?.casing });
+  const dialect = new SQLiteAsyncDialect(
+    config?.casing ? { casing: config.casing } : {},
+  );
 
   let logger: kuttydbSessionOptions["logger"];
   if (config?.logger === true) {
@@ -51,9 +53,16 @@ export function drizzle<
     };
   }
 
-  const session = new kuttydbSession(db, dialect, schema, {
-    logger,
-  });
+  const session = new kuttydbSession(
+    db,
+    dialect,
+    schema,
+    logger
+      ? {
+          logger,
+        }
+      : {},
+  );
 
   return new BaseSQLiteDatabase(
     "async",

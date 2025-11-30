@@ -1,6 +1,6 @@
 import { describe } from "vitest";
-import connector from "../../src/connectors/planetscale";
-import { testConnector } from "./_tests";
+import connector from "../../src/connectors/planetscale.js";
+import { testConnector } from "./_tests.js";
 
 describe.runIf(
   process.env.PLANETSCALE_HOST &&

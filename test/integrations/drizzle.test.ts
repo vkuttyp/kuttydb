@@ -1,13 +1,16 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { Database, createDatabase } from "../../src";
-import { type DrizzleDatabase, drizzle } from "../../src/integrations/drizzle";
+import { type Database, createDatabase } from "../../src/index.js";
+import {
+  type DrizzleDatabase,
+  drizzle,
+} from "../../src/integrations/drizzle/index.js";
 
 import * as dSqlite from "drizzle-orm/sqlite-core";
-import sqliteConnector from "../../src/connectors/better-sqlite3";
+import sqliteConnector from "../../src/connectors/better-sqlite3.js";
 
 import * as dPg from "drizzle-orm/pg-core";
-import pgConnector from "../../src/connectors/postgresql";
+import pgConnector from "../../src/connectors/postgresql.js";
 
 describe("integrations: drizzle: better-sqlite3", () => {
   const users = dSqlite.sqliteTable("users", {
@@ -37,14 +40,14 @@ describe("integrations: drizzle: better-sqlite3", () => {
       .returning();
 
     expect(res.length).toBe(1);
-    expect(res[0].name).toBe("John Doe");
+    expect(res[0]!.name).toBe("John Doe");
   });
 
   it("select", async () => {
     const res = await drizzleDb.select().from(users).all();
 
     expect(res.length).toBe(1);
-    expect(res[0].name).toBe("John Doe");
+    expect(res[0]!.name).toBe("John Doe");
   });
 
   it("accepts boolean logger config", () => {
@@ -89,16 +92,16 @@ describe("integrations: drizzle: with schema parameter", () => {
       .returning();
 
     expect(res.length).toBe(1);
-    expect(res[0].name).toBe("Jane Doe");
-    expect(res[0].email).toBe("jane@example.com");
+    expect(res[0]!.name).toBe("Jane Doe");
+    expect(res[0]!.email).toBe("jane@example.com");
   });
 
   it("select with schema", async () => {
     const res = await drizzleDb.select().from(users).all();
 
     expect(res.length).toBe(1);
-    expect(res[0].name).toBe("Jane Doe");
-    expect(res[0].email).toBe("jane@example.com");
+    expect(res[0]!.name).toBe("Jane Doe");
+    expect(res[0]!.email).toBe("jane@example.com");
   });
 
   afterAll(async () => {
@@ -139,14 +142,14 @@ describe.runIf(process.env.POSTGRESQL_URL)(
         .returning();
 
       expect(res.length).toBe(1);
-      expect(res[0].name).toBe("John Doe");
+      expect(res[0]!.name).toBe("John Doe");
     });
 
     it("select", async () => {
       const res = await drizzleDb.select().from(users).all();
 
       expect(res.length).toBe(1);
-      expect(res[0].name).toBe("John Doe");
+      expect(res[0]!.name).toBe("John Doe");
     });
 
     afterAll(async () => {

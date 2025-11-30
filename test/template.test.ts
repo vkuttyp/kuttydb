@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { sqlTemplate } from "../src/template";
+import { sqlTemplate } from "../src/template.js";
 
 describe("SQL Template", () => {
   const tests = [

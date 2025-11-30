@@ -12,7 +12,7 @@ const connectorsMetaFile = fileURLToPath(
   new URL("../src/_connectors.ts", import.meta.url),
 );
 
-const aliases = {
+const aliases: Record<string, readonly string[]> = {
   "node-sqlite": ["sqlite"],
   "bun-sqlite": ["bun"],
   "libsql-node": ["libsql"],
@@ -67,20 +67,23 @@ for (const entry of connectorEntries) {
 
   const safeName = camelCase(name).replace(/db/i, "DB").replace(/sql/i, "SQL");
 
-  const alternativeNames: string[] = aliases[name] || [];
+  const alternativeNames: readonly string[] = aliases[name] || [];
 
   const names = [...new Set([name, ...alternativeNames])];
 
   const optionsTName = (connectorOptionsNameAliases[name] || upperFirst(safeName)) + "Options";
 
-  connectors.push({
+  const connectorEntry: any = {
     name,
     safeName,
     names,
     subpath,
-    optionsTExport,
     optionsTName,
-  });
+  };
+  if (optionsTExport) {
+    connectorEntry.optionsTExport = optionsTExport;
+  }
+  connectors.push(connectorEntry);
 }
 
 connectors.sort((a, b) => a.name.localeCompare(b.name));

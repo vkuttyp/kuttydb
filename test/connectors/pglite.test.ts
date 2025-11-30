@@ -2,8 +2,8 @@ import { fileURLToPath } from "node:url";
 import { rm, mkdir } from "node:fs/promises";
 import { dirname } from "node:path";
 import { describe } from "vitest";
-import PGlite from "../../src/connectors/pglite";
-import { testConnector } from "./_tests";
+import PGlite from "../../src/connectors/pglite.js";
+import { testConnector } from "./_tests.js";
 
 describe("connectors: pglite", async () => {
   const dataDir = fileURLToPath(new URL(".tmp/pglite", import.meta.url));

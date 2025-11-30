@@ -1,8 +1,8 @@
 import { getPlatformProxy, type PlatformProxy } from "wrangler";
 
 import { afterAll, beforeAll, describe } from "vitest";
-import cloudflareHyperdrivePostgresql from "../../../src/connectors/cloudflare-hyperdrive-postgresql";
-import { testConnector } from "../_tests";
+import cloudflareHyperdrivePostgresql from "../../../src/connectors/cloudflare-hyperdrive-postgresql.js";
+import { testConnector } from "../_tests.js";
 import { fileURLToPath } from "node:url";
 
 describe.runIf(process.env.POSTGRESQL_URL)(

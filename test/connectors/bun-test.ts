@@ -1,7 +1,8 @@
+// @ts-expect-error - bun:test is not typed
 import { expect, test } from "bun:test";
 
-import connector from "../../src/connectors/bun-sqlite";
-import { createDatabase } from "../../src";
+import connector from "../../src/connectors/bun-sqlite.js";
+import { createDatabase } from "../../src/index.js";
 
 test("connectors: bun", async () => {
   const db = createDatabase(connector({ name: ":memory:" }));

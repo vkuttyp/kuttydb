@@ -2,8 +2,8 @@ import { fileURLToPath } from "node:url";
 import { existsSync, unlinkSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { describe } from "vitest";
-import libSql from "../../src/connectors/libsql/node";
-import { testConnector } from "./_tests";
+import libSql from "../../src/connectors/libsql/node.js";
+import { testConnector } from "./_tests.js";
 
 describe("connectors: libsql", () => {
   const dbPath = resolve(

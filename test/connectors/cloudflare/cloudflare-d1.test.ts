@@ -1,7 +1,7 @@
 import { getPlatformProxy, type PlatformProxy } from "wrangler";
 import { afterAll, beforeAll, describe } from "vitest";
-import cloudflareD1 from "../../../src/connectors/cloudflare-d1";
-import { testConnector } from "../_tests";
+import cloudflareD1 from "../../../src/connectors/cloudflare-d1.js";
+import { testConnector } from "../_tests.js";
 import { fileURLToPath } from "node:url";
 
 describe("connectors: cloudflare-d1", () => {

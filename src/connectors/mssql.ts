@@ -64,6 +64,7 @@ export default function mssqlConnector(opts: ConnectorOptions) {
         const parameterKeys = Object.keys(_parameters);
         for (const key of parameterKeys) {
           const parameter = _parameters[key];
+          if (!parameter) continue;
 
           request.addParameter(parameter.name, parameter.type, parameter.value);
         }

@@ -1,6 +1,6 @@
 import { describe } from "vitest";
-import connector from "../../src/connectors/postgresql";
-import { testConnector } from "./_tests";
+import connector from "../../src/connectors/postgresql.js";
+import { testConnector } from "./_tests.js";
 
 describe.runIf(process.env.POSTGRESQL_URL)(
   "connectors: postgresql.test",
