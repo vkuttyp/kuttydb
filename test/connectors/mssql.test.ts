@@ -241,6 +241,41 @@ describe.runIf(
     });
   });
 
+  it("should return single JSON object using FOR JSON PATH, WITHOUT_ARRAY_WRAPPER", async () => {
+    const stmt = db.prepare(`
+      SELECT 
+        id, 
+        firstName, 
+        lastName, 
+        email,
+        age
+      FROM (
+        VALUES (1, 'John', 'Doe', 'john@example.com', 30)
+      ) AS Users(id, firstName, lastName, email, age)
+      FOR JSON PATH, WITHOUT_ARRAY_WRAPPER
+    `);
+    const rows = await stmt.all();
+    expect(rows).toBeDefined();
+    expect(rows.length).toBeGreaterThan(0);
+
+    // SQL Server returns JSON as a single column result
+    const jsonColumn = Object.keys(rows[0] as object)[0]!;
+    const jsonString = (rows[0] as Record<string, string>)[jsonColumn]!;
+
+    expect(jsonString).toBeDefined();
+    const jsonData = JSON.parse(jsonString);
+    
+    // WITHOUT_ARRAY_WRAPPER returns a single object, not an array
+    expect(Array.isArray(jsonData)).toBe(false);
+    expect(jsonData).toMatchObject({
+      id: 1,
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@example.com",
+      age: 30,
+    });
+  });
+
   it("should call a stored procedure with JSON parameter", async () => {
     const userData = {
       name: "Alice Johnson",
