@@ -526,7 +526,9 @@ describe.runIf(
   });
 
   it("should handle parameter count mismatch", async () => {
-    const stmt = db.prepare("INSERT INTO sys.tables (name, object_id) VALUES (?, ?)");
+    const stmt = db.prepare(
+      "INSERT INTO sys.tables (name, object_id) VALUES (?, ?)",
+    );
     // Providing only one parameter when two are expected - should fail
     await expect(async () => {
       await stmt.all("test");
@@ -621,9 +623,11 @@ describe.runIf(
       COMMIT TRANSACTION;
     `);
 
-    const stmt = db.prepare("SELECT * FROM dbo.test_transactions WHERE id IN (?, ?)");
+    const stmt = db.prepare(
+      "SELECT * FROM dbo.test_transactions WHERE id IN (?, ?)",
+    );
     const rows = await stmt.all(3, 4);
-    
+
     expect(rows.length).toBe(1);
     expect((rows[0] as any).id).toBe(3);
   });
@@ -684,32 +688,41 @@ describe.runIf(
   });
 
   it("should handle multiple inserts in batch", async () => {
-    const stmt = db.prepare("INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)");
-    
+    const stmt = db.prepare(
+      "INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)",
+    );
+
     await stmt.run(1, "Alice");
     await stmt.run(2, "Bob");
     await stmt.run(3, "Charlie");
 
-    const selectStmt = db.prepare("SELECT COUNT(*) as count FROM dbo.test_batch");
+    const selectStmt = db.prepare(
+      "SELECT COUNT(*) as count FROM dbo.test_batch",
+    );
     const rows = await selectStmt.all();
     expect((rows[0] as any).count).toBe(3);
   });
 
   it("should handle binary data (BLOB)", async () => {
-    const binaryData = Buffer.from("Hello, World!", "utf-8");
-    const stmt = db.prepare("INSERT INTO dbo.test_batch (id, name, data) VALUES (?, ?, ?)");
+    const binaryData = Buffer.from("Hello, World!", "utf8");
+    const stmt = db.prepare(
+      "INSERT INTO dbo.test_batch (id, name, data) VALUES (?, ?, ?);",
+    );
     await stmt.run(10, "binary_test", binaryData as any);
 
     const selectStmt = db.prepare("SELECT * FROM dbo.test_batch WHERE id = ?");
     const rows = await selectStmt.all(10);
     expect(rows.length).toBe(1);
     expect(Buffer.isBuffer((rows[0] as any).data)).toBe(true);
-    expect((rows[0] as any).data.toString("utf-8")).toBe("Hello, World!");
+    expect((rows[0] as any).data.toString("utf8")).toBe("Hello, World!");
   });
 
   it("should handle special characters in parameters", async () => {
-    const specialText = "Test with 'quotes', \"double quotes\", and\nnewlines\ttabs";
-    const stmt = db.prepare("INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)");
+    const specialText =
+      "Test with 'quotes', \"double quotes\", and\nnewlines\ttabs";
+    const stmt = db.prepare(
+      "INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)",
+    );
     await stmt.run(20, specialText);
 
     const selectStmt = db.prepare("SELECT * FROM dbo.test_batch WHERE id = ?");
@@ -719,7 +732,9 @@ describe.runIf(
 
   it("should handle unicode characters", async () => {
     const unicodeText = "Hello 世界 🌍 مرحبا";
-    const stmt = db.prepare("INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)");
+    const stmt = db.prepare(
+      "INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)",
+    );
     await stmt.run(30, unicodeText);
 
     const selectStmt = db.prepare("SELECT * FROM dbo.test_batch WHERE id = ?");
@@ -730,24 +745,27 @@ describe.runIf(
   it("should handle stored procedure with output parameters", async () => {
     // Note: Current implementation doesn't support OUTPUT parameters directly
     // This test calls the procedure and gets result set instead (returns 2 rows)
-    const stmt = db.prepare("DECLARE @name NVARCHAR(100); EXEC dbo.GetUserWithOutput @userId = ?, @userName = @name OUTPUT; SELECT @name as userName");
+    const stmt = db.prepare(
+      "DECLARE @name NVARCHAR(100); EXEC dbo.GetUserWithOutput @userId = ?, @userName = @name OUTPUT; SELECT @name as userName",
+    );
     const rows = await stmt.all(42);
     // Procedure returns result set + our SELECT statement = 2 rows
     expect(rows.length).toBeGreaterThanOrEqual(1);
     // Check the last row for our output
-    const lastRow = rows[rows.length - 1];
+    const lastRow = rows.at(-1);
     expect((lastRow as any).userName).toBe("User_42");
   });
 
   it("should handle empty result sets", async () => {
     const stmt = db.prepare("SELECT * FROM dbo.test_batch WHERE id = ?");
-    const rows = await stmt.all(99999);
+    const rows = await stmt.all(99_999);
     expect(rows.length).toBe(0);
   });
 
   it("should handle NULL values correctly", async () => {
-    // eslint-disable-next-line unicorn/no-null
-    const stmt = db.prepare("INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)");
+    const stmt = db.prepare(
+      "INSERT INTO dbo.test_batch (id, name) VALUES (?, ?)",
+    );
     // eslint-disable-next-line unicorn/no-null
     await stmt.run(40, null);
 
@@ -786,11 +804,11 @@ describe.runIf(
   it("should handle multiple sequential queries efficiently", async () => {
     const start = Date.now();
     const stmt = db.prepare("SELECT ?");
-    
+
     for (let i = 0; i < 10; i++) {
       await stmt.all(i);
     }
-    
+
     const duration = Date.now() - start;
     // Should complete 10 queries in reasonable time (less than 5 seconds)
     expect(duration).toBeLessThan(5000);
@@ -798,7 +816,9 @@ describe.runIf(
 
   it("should handle large result sets", async () => {
     // Insert 100 rows
-    const insertStmt = db.prepare("INSERT INTO dbo.test_performance (id, data) VALUES (?, ?)");
+    const insertStmt = db.prepare(
+      "INSERT INTO dbo.test_performance (id, data) VALUES (?, ?)",
+    );
     for (let i = 1; i <= 100; i++) {
       await insertStmt.run(i, `Data for row ${i}`);
     }
@@ -815,7 +835,7 @@ describe.runIf(
 
   it("should handle prepared statement reuse", async () => {
     const stmt = db.prepare("SELECT * FROM dbo.test_performance WHERE id = ?");
-    
+
     const start = Date.now();
     for (let i = 1; i <= 20; i++) {
       await stmt.all(i);
@@ -828,7 +848,7 @@ describe.runIf(
 
   it("should handle concurrent query execution", async () => {
     const stmt = db.prepare("SELECT ?");
-    
+
     const start = Date.now();
     // Note: Current implementation may execute these sequentially due to connection management
     const promises = [];
@@ -844,15 +864,19 @@ describe.runIf(
 
   it("should handle large text data", async () => {
     const largeText = "a".repeat(900); // Just under 1000 char limit
-    const stmt = db.prepare("INSERT INTO dbo.test_performance (id, data) VALUES (?, ?)");
-    
+    const stmt = db.prepare(
+      "INSERT INTO dbo.test_performance (id, data) VALUES (?, ?)",
+    );
+
     const start = Date.now();
     await stmt.run(1000, largeText);
     const duration = Date.now() - start;
 
     expect(duration).toBeLessThan(2000);
 
-    const selectStmt = db.prepare("SELECT * FROM dbo.test_performance WHERE id = ?");
+    const selectStmt = db.prepare(
+      "SELECT * FROM dbo.test_performance WHERE id = ?",
+    );
     const rows = await selectStmt.all(1000);
     expect((rows[0] as any).data).toBe(largeText);
   });
@@ -860,7 +884,7 @@ describe.runIf(
   it("should handle query timeout scenarios", async () => {
     // Test a long-running query
     const stmt = db.prepare("WAITFOR DELAY '00:00:01'; SELECT 1 as result");
-    
+
     const start = Date.now();
     const rows = await stmt.all();
     const duration = Date.now() - start;
